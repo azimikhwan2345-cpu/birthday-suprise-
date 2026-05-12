@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday! ❤️</title>
+    <title>Happy Birthday SAYANGGGGG! ❤️</title>
     <style>
         body {
             margin: 0;
@@ -11,91 +11,121 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            background: #ffe3e3;
+            min-height: 100vh;
+            background: #fff0f3;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            overflow: hidden;
             text-align: center;
+            overflow-x: hidden;
         }
 
         .card {
             background: white;
             padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border-radius: 25px;
+            box-shadow: 0 15px 35px rgba(255, 77, 109, 0.2);
             z-index: 10;
-            max-width: 400px;
+            max-width: 90%;
+            width: 450px;
+            margin: 20px;
         }
 
-        h1 { color: #ff4d6d; margin-bottom: 10px; }
-        p { color: #555; line-height: 1.6; }
+        h1 { color: #ff4d6d; font-size: 2rem; margin-bottom: 10px; }
+        .subtext { color: #880d1e; font-style: italic; margin-bottom: 20px; }
+
+        .photo-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 20px;
+            display: none; /* Hidden until button click */
+        }
+
+        .photo-container img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 12px;
+            border: 3px solid #ff4d6d;
+        }
+
+        /* Large feature photo */
+        .photo-container img:first-child {
+            grid-column: span 2;
+            height: 300px;
+        }
 
         .btn {
             background: #ff4d6d;
             color: white;
             border: none;
-            padding: 12px 25px;
+            padding: 15px 30px;
             border-radius: 50px;
-            font-size: 18px;
+            font-size: 1.2rem;
             cursor: pointer;
-            transition: transform 0.2s;
-            margin-top: 20px;
+            transition: 0.3s;
+            box-shadow: 0 4px 15px rgba(255, 77, 109, 0.4);
         }
 
-        .btn:hover { transform: scale(1.1); }
+        .btn:hover { transform: translateY(-3px); background: #ff758f; }
 
-        #surprise { display: none; margin-top: 20px; }
+        #surprise-msg { display: none; margin-top: 25px; color: #555; }
 
-        /* Floating Hearts Animation */
         .heart {
-            position: absolute;
+            position: fixed;
+            top: -10%;
             color: #ff4d6d;
             font-size: 20px;
             user-select: none;
-            animation: moveUp 4s linear infinite;
-            opacity: 0;
+            animation: fall linear forwards;
+            z-index: 1;
         }
 
-        @keyframes moveUp {
-            0% { transform: translateY(100vh) rotate(0deg); opacity: 1; }
-            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+        @keyframes fall {
+            to { transform: translateY(110vh) rotate(360deg); }
         }
     </style>
 </head>
 <body>
 
     <div class="card">
-        <h1>Happy Birthday, SAYANGGGG! 🎂</h1>
-        <p> <: I wanted to build something special just for you today :>.</p>
-        <button class="btn" onclick="revealSurprise()">Click for your surprise</button>
+        <h1>Happy Birthday, SAYANGGGGG! 🎂</h1>
+        <p class="subtext"><:: I wanted to build something special just for you today :></p>
         
-        <div id="surprise">
-            <p><strong>"You are the most amazing person I know. I'm so lucky to have you in my life. Let's make this year the best one yet!"</strong></p>
-            <p>❤️ 💌 🥂</p>
+        <button class="btn" onclick="showSurprise()">Open Your Surprise ❤️</button>
+        
+        <div id="surprise-msg">
+            <p><strong>"Every moment with you is a gift. Happy Birthday to the most beautiful girl!"</strong></p>
+            
+            <div class="photo-container" id="gallery">
+                <img src="WhatsApp Image 2026-05-12 at 11.18.14 PM (4).jpeg" alt="Us">
+                <img src="WhatsApp Image 2026-05-12 at 11.18.14 PM (3).jpeg" alt="Memory">
+                <img src="WhatsApp Image 2026-05-12 at 11.18.14 PM (2).jpeg" alt="Memory">
+                <img src="WhatsApp Image 2026-05-12 at 11.18.14 PM (1).jpeg" alt="Memory">
+                <img src="WhatsApp Image 2026-05-12 at 11.18.14 PM.jpeg" alt="Memory">
+                <img src="WhatsApp Image 2026-05-12 at 11.18.50 PM.jpeg" alt="Memory">
+                <img src="WhatsApp Image 2026-05-12 at 11.19.28 PM.jpeg" alt="Memory">
+            </div>
         </div>
     </div>
 
     <script>
-        function revealSurprise() {
-            document.getElementById('surprise').style.display = 'block';
+        function showSurprise() {
+            document.getElementById('surprise-msg').style.display = 'block';
+            document.getElementById('gallery').style.display = 'grid';
             document.querySelector('.btn').style.display = 'none';
-            createHearts();
+            startHearts();
         }
 
-        function createHearts() {
-            for (let i = 0; i < 30; i++) {
-                setTimeout(() => {
-                    const heart = document.createElement('div');
-                    heart.className = 'heart';
-                    heart.innerHTML = '❤️';
-                    heart.style.left = Math.random() * 100 + 'vw';
-                    heart.style.animationDuration = (Math.random() * 2 + 3) + 's';
-                    document.body.appendChild(heart);
-                    
-                    // Clean up hearts
-                    setTimeout(() => heart.remove(), 5000);
-                }, i * 200);
-            }
+        function startHearts() {
+            setInterval(() => {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.innerHTML = '❤️';
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                document.body.appendChild(heart);
+                setTimeout(() => heart.remove(), 5000);
+            }, 300);
         }
     </script>
 </body>
